@@ -1,0 +1,903 @@
+@ -0,0 +1,902 @@
+<!DOCTYPE html>
+<html lang="en">
+<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono&display=swap" rel="stylesheet">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Growth Solutions | Elite Business Services</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'IBM Plex Mono', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 25px 80px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            color: #ffffff;
+        }
+
+        .logo-accent {
+            color: #9dc9ff;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 40px;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: #a0a0a0;
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+            transition: color 0.3s;
+            letter-spacing: 0.3px;
+        }
+
+        .nav-links a:hover {
+            color: #ffffff;
+        }
+
+        .nav-cta {
+            padding: 10px 24px;
+            background: #60a5fa;
+            border-radius: 6px;
+            color: #ffffff !important;
+            transition: background 0.3s;
+        }
+
+        .nav-cta:hover {
+            background: #3b82f6;
+        }
+
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            padding: 120px 20px 80px;
+        }
+
+        #canvas3d {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 0;
+            opacity: 0.4;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            padding: 8px 20px;
+            background: rgba(96, 165, 250, 0.1);
+            border: 1px solid rgba(96, 165, 250, 0.3);
+            border-radius: 50px;
+            color: #60a5fa;
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 30px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-family: 'Inter';
+            font-size: 72px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            line-height: 1.1;
+            letter-spacing: -2px;
+        }
+
+        .hero p {
+            font-size: 20px;
+            margin-bottom: 40px;
+            color: #a0a0a0;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.7;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-primary {
+            padding: 16px 32px;
+            font-size: 16px;
+            background: #60a5fa;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-primary:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(96, 165, 250, 0.3);
+        }
+
+        .btn-secondary {
+            padding: 16px 32px;
+            font-size: 16px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            border-color: rgba(255, 255, 255, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .stats {
+            display: flex;
+            gap: 60px;
+            margin-top: 80px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 48px;
+            font-weight: 700;
+            color: #60a5fa;
+            line-height: 1;
+            margin-bottom: 8px;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: #a0a0a0;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .services {
+            padding: 120px 80px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 80px;
+        }
+
+        .section-subtitle {
+            color: #60a5fa;
+            font-size: 14px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+        }
+
+        .section-description {
+            font-size: 18px;
+            color: #a0a0a0;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 48px;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #60a5fa, transparent);
+            opacity: 0;
+            transition: opacity 0.4s;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            background: rgba(255, 255, 255, 0.04);
+            border-color: rgba(96, 165, 250, 0.3);
+            box-shadow: 0 24px 48px rgba(0, 0, 0, 0.4);
+        }
+
+        .service-card:hover::before {
+            opacity: 1;
+        }
+
+        .service-number {
+            font-size: 14px;
+            color: #60a5fa;
+            font-weight: 600;
+            margin-bottom: 24px;
+            letter-spacing: 1px;
+        }
+
+        .service-card h3 {
+            font-size: 28px;
+            margin-bottom: 16px;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+        }
+
+        .service-card p {
+            color: #a0a0a0;
+            line-height: 1.7;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-bottom: 32px;
+        }
+
+        .service-features li {
+            color: #d0d0d0;
+            margin-bottom: 12px;
+            padding-left: 24px;
+            position: relative;
+            font-size: 15px;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+            font-weight: bold;
+        }
+
+        .service-btn {
+            width: 100%;
+            padding: 14px 24px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .service-btn:hover {
+            background: #60a5fa;
+            border-color: #60a5fa;
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 2000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background: #0f0f0f;
+            margin: 80px auto;
+            padding: 60px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            width: 90%;
+            max-width: 700px;
+            animation: slideUp 0.3s ease;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close {
+            color: #a0a0a0;
+            float: right;
+            font-size: 32px;
+            font-weight: 300;
+            cursor: pointer;
+            transition: color 0.3s;
+            line-height: 1;
+        }
+
+        .close:hover {
+            color: #ffffff;
+        }
+
+        .modal h2 {
+            color: #ffffff;
+            margin-bottom: 12px;
+            font-family: 'Inter';
+            font-size: 36px;
+            font-weight: 700;
+            letter-spacing: -1px;
+            clear: both;
+        }
+
+        .modal-subtitle {
+            color: #a0a0a0;
+            margin-bottom: 40px;
+            font-family: 'Inter';
+            font-size: 16px;
+        }
+
+        .form-group {
+            margin-bottom: 28px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 10px;
+            color: #d0d0d0;
+            font-size: 14px;
+            font-weight: 600;
+            letter-spacing: 0.3px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            color: #fff;
+            font-size: 15px;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border: 1px solid #60a5fa;
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: #60a5fa;
+            border: none;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            background: #3b82f6;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px rgba(96, 165, 250, 0.3);
+        }
+
+        .success-message {
+            display: none;
+            background: rgba(34, 197, 94, 0.1);
+            border: 1px solid rgba(34, 197, 94, 0.3);
+            border-radius: 8px;
+            padding: 20px;
+            margin-top: 24px;
+            text-align: center;
+            color: #22c55e;
+            font-weight: 500;
+        }
+
+        @media (max-width: 1024px) {
+            .nav {
+                padding: 20px 40px;
+            }
+
+            .services {
+                padding: 80px 40px;
+            }
+
+            .service-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav {
+                padding: 15px 20px;
+            }
+
+            .nav-links {
+                gap: 20px;
+            }
+
+            .hero h1 {
+                font-size: 48px;
+            }
+
+            .hero p {
+                font-size: 18px;
+            }
+
+            .stats {
+                gap: 40px;
+            }
+
+            .stat-number {
+                font-size: 36px;
+            }
+
+            .services {
+                padding: 60px 20px;
+            }
+
+            .section-title {
+                font-family: 'Inter';
+                font-size: 36px;
+            }
+
+            .service-card {
+                padding: 32px;
+            }
+
+            .modal-content {
+                padding: 40px 24px;
+                margin: 40px auto;
+            }
+
+            .modal h2 {
+                font-family: 'Inter';
+                font-size: 28px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav">
+        <div class="logo">OTEKA <span class="logo-accent">Enterprise</span></div>
+        <div class="nav-links">
+            <a href="#home">Home</a>
+            <a href="#services">Services</a>
+            <a href="#contact" class="nav-cta">Get Started</a>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <canvas id="canvas3d"></canvas>
+        <div class="hero-content">
+            <div class="hero-badge">TRUSTED BY LEADING BRANDS</div>
+            <h1>Accelerate Your Digital Growth</h1>
+            <p>Strategic partnerships and cutting-edge solutions for Amazon sellers, TikTok creators, and ambitious brands seeking exceptional web presence.</p>
+            <div class="hero-buttons">
+                <button class="btn-primary" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                    Explore Services
+                </button>
+                <button class="btn-secondary" onclick="openModal('website')">
+                    Schedule Consultation
+                </button>
+            </div>
+            <div class="stats">
+                <div class="stat-item">
+                    <div class="stat-number">250+</div>
+                    <div class="stat-label">Clients Served</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">$50M+</div>
+                    <div class="stat-label">Revenue Generated</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">98%</div>
+                    <div class="stat-label">Client Satisfaction</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="services" id="services">
+        <div class="section-header">
+            <div class="section-subtitle">OUR EXPERTISE</div>
+            <h2 class="section-title">Comprehensive Growth Solutions</h2>
+            <p class="section-description">Tailored strategies designed to scale your business across multiple channels with measurable results.</p>
+        </div>
+        <div class="service-grid">
+            <div class="service-card">
+                <div class="service-number">01</div>
+                <h3>Amazon Brand Scaling</h3>
+                <p>End-to-end Amazon growth strategies that drive sustainable revenue increases through optimized listings, advanced PPC management, and data-driven insights.</p>
+                <ul class="service-features">
+                    <li>Listing optimization & A+ content</li>
+                    <li>Strategic PPC campaign management</li>
+                    <li>Inventory & supply chain consulting</li>
+                    <li>Brand registry & IP protection</li>
+                </ul>
+                <button class="service-btn" onclick="openModal('amazon')">Start Your Growth Journey</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">02</div>
+                <h3>TikTok Affiliate Partnerships</h3>
+                <p>Connect your innovative products with high-performing TikTok creators who authentically engage audiences and drive measurable conversions.</p>
+                <ul class="service-features">
+                    <li>Influencer vetting & matching</li>
+                    <li>Campaign strategy & creative direction</li>
+                    <li>Performance tracking & analytics</li>
+                    <li>Relationship management & scaling</li>
+                </ul>
+                <button class="service-btn" onclick="openModal('tiktok')">Launch Your Campaign</button>
+            </div>
+
+            <div class="service-card">
+                <div class="service-number">03</div>
+                <h3>Custom Website Development</h3>
+                <p>Premium web experiences engineered for performance, conversion, and brand elevation. From concept to deployment, we build digital platforms that deliver results.</p>
+                <ul class="service-features">
+                    <li>Custom design & development</li>
+                    <li>E-commerce & payment integration</li>
+                    <li>SEO optimization & performance</li>
+                    <li>Ongoing support & maintenance</li>
+                </ul>
+                <button class="service-btn" onclick="openModal('website')">Build Your Presence</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- cecesoup -->
+
+    <!-- cecesoup -->
+
+    <!-- Amazon Modal -->
+    <div id="amazonModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('amazon')">&times;</span>
+            <h2>Amazon Brand Scaling</h2>
+            <p class="modal-subtitle">Tell us about your brand and we'll create a customized growth strategy.</p>
+            <form id="amazonForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" required placeholder="John Smith">
+                </div>
+                <div class="form-group">
+                    <label>Business Email *</label>
+                    <input type="email" required placeholder="john@company.com">
+                </div>
+                <div class="form-group">
+                    <label>Company Name *</label>
+                    <input type="text" required placeholder="Your Company LLC">
+                </div>
+                <div class="form-group">
+                    <label>Current Monthly Revenue *</label>
+                    <select required>
+                        <option value="">Select your range</option>
+                        <option>Just starting out</option>
+                        <option>$1,000 - $10,000</option>
+                        <option>$10,000 - $50,000</option>
+                        <option>$50,000 - $100,000</option>
+                        <option>$100,000 - $500,000</option>
+                        <option>$500,000+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Number of SKUs</label>
+                    <input type="number" min="0" placeholder="e.g., 5">
+                </div>
+                <div class="form-group">
+                    <label>Primary Goals *</label>
+                    <textarea required placeholder="E.g., Increase organic ranking, optimize PPC spend, expand to new categories..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>How did you hear about us?</label>
+                    <select>
+                        <option value="">Select one</option>
+                        <option>Google Search</option>
+                        <option>Social Media</option>
+                        <option>Referral</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+                <div class="success-message" id="amazonSuccess">
+                    ✓ Thank you! Our team will review your application and contact you within 24 hours.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- TikTok Modal -->
+    <div id="tiktokModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('tiktok')">&times;</span>
+            <h2>TikTok Affiliate Partnership</h2>
+            <p class="modal-subtitle">Share your product details and we'll match you with ideal creators.</p>
+            <form id="tiktokForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" required placeholder="Jane Doe">
+                </div>
+                <div class="form-group">
+                    <label>Business Email *</label>
+                    <input type="email" required placeholder="jane@brand.com">
+                </div>
+                <div class="form-group">
+                    <label>Brand/Company Name *</label>
+                    <input type="text" required placeholder="Your Brand Name">
+                </div>
+                <div class="form-group">
+                    <label>Product Category *</label>
+                    <select required>
+                        <option value="">Select category</option>
+                        <option>Beauty & Skincare</option>
+                        <option>Fashion & Accessories</option>
+                        <option>Technology & Gadgets</option>
+                        <option>Health & Wellness</option>
+                        <option>Home & Lifestyle</option>
+                        <option>Food & Beverage</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Target Demographic</label>
+                    <input type="text" placeholder="e.g., Women 25-40, Urban professionals">
+                </div>
+                <div class="form-group">
+                    <label>Monthly Marketing Budget *</label>
+                    <select required>
+                        <option value="">Select range</option>
+                        <option>$2,500 - $5,000</option>
+                        <option>$5,000 - $15,000</option>
+                        <option>$15,000 - $50,000</option>
+                        <option>$50,000+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Product Description *</label>
+                    <textarea required placeholder="Describe your product, its unique selling points, and why it's perfect for TikTok..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Website URL</label>
+                    <input type="url" placeholder="https://yourbrand.com">
+                </div>
+                <button type="submit" class="submit-btn">Submit Application</button>
+                <div class="success-message" id="tiktokSuccess">
+                    ✓ Thank you! We'll connect you with relevant creators within 48 hours.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Website Modal -->
+    <div id="websiteModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal('website')">&times;</span>
+            <h2>Custom Website Development</h2>
+            <p class="modal-subtitle">Let's discuss your vision and create something exceptional.</p>
+            <form id="websiteForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" required placeholder="Alex Johnson">
+                </div>
+                <div class="form-group">
+                    <label>Business Email *</label>
+                    <input type="email" required placeholder="alex@business.com">
+                </div>
+                <div class="form-group">
+                    <label>Company Name</label>
+                    <input type="text" placeholder="Your Company">
+                </div>
+                <div class="form-group">
+                    <label>Phone Number</label>
+                    <input type="tel" placeholder="+1 (555) 000-0000">
+                </div>
+                <div class="form-group">
+                    <label>Project Type *</label>
+                    <select required>
+                        <option value="">Select type</option>
+                        <option>E-commerce Platform</option>
+                        <option>Corporate Website</option>
+                        <option>Landing Page</option>
+                        <option>Web Application</option>
+                        <option>Portfolio/Showcase</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Current Website Status</label>
+                    <select>
+                        <option>No existing website</option>
+                        <option>Have website - need redesign</option>
+                        <option>Have website - need improvements</option>
+                        <option>Starting from scratch</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Project Budget *</label>
+                    <select required>
+                        <option value="">Select range</option>
+                        <option>$5,000 - $10,000</option>
+                        <option>$10,000 - $25,000</option>
+                        <option>$25,000 - $50,000</option>
+                        <option>$50,000 - $100,000</option>
+                        <option>$100,000+</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Timeline</label>
+                    <select>
+                        <option>ASAP</option>
+                        <option>1-2 months</option>
+                        <option>2-3 months</option>
+                        <option>3-6 months</option>
+                        <option>Flexible</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Project Details *</label>
+                    <textarea required placeholder="Describe your vision, required features, design preferences, target audience, and any specific functionality needed..."></textarea>
+                </div>
+                <button type="submit" class="submit-btn">Submit Request</button>
+                <div class="success-message" id="websiteSuccess">
+                    ✓ Thank you! Our development team will review your request and reach out within 24 hours.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // 3D Canvas Animation - More subtle and professional
+        const canvas = document.getElementById('canvas3d');
+        const ctx = canvas.getContext('2d');
+        
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = 60;
+        const connections = [];
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.z = Math.random() * 1500 + 500;
+                this.size = Math.random() * 1.5 + 0.5;
+                this.speedX = (Math.random() - 0.5) * 0.3;
+                this.speedY = (Math.random() - 0.5) * 0.3;
+                this.speedZ = Math.random() * 0.8 + 0.4;
+            }
+
+            update() {
+                this.z -= this.speedZ;
+                
+                if (this.z <= 0) {
+                    this.z = 2000;
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                }
+
+                const scale = 1000 / (1000 + this.z);
+                this.x += this.speedX * scale;
+                this.y += this.speedY * scale;
+
+                if (this.x < 0 || this.x > canvas.width || 
+                    this.y < 0 || this.y > canvas.height) {
+                    this.z = 2000;
+                    this.x = Math.random() * canvas.width;
+                    this.y = Math.random() * canvas.height;
+                }
+            }
+
+            draw() {
+                const scale = 1000 / (1000 + this.z);
+                const x = (this.x - canvas.width / 2) * scale + canvas.width / 2;
+                const y = (this.y - canvas.height / 2) * scale + canvas.height / 2;
+                const size = this.size * scale;
+                const opacity = (1 - this.z / 2000) * 0.6;
+
+                ctx.beginPath();
+                ctx.arc(x, y, size, 0, Math.PI * 2);
+                ctx.fillStyle = `rgba(96, 165, 250, ${opacity})`;
+                ctx.fill();
+            }
+
+            getScreenPos() {
+                const scale = 1000 / (1000 + this.z);
+                return {
+                    x: (this.x - canvas.width / 2) * scale + canvas.width / 2,
+                    y: (this.y - canvas.height / 2) * scale + canvas.height / 2,
+                    scale: scale
+                };
+            }
+        }
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
+
+        function drawConnections() {
+            for (let i = 0; i < particles.length; i++) {
